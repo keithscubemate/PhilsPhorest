@@ -9,11 +9,11 @@ tuple<double, double> Tree::predict(const std::vector<double>& features) {
 
     while (this->children_left[node] != -1) {
         int feature = this->feature[node];
-        int sample = features[feature];
+        double sample = features[feature];
 
-        int threshold = this->threshold[node];
+        double threshold = this->threshold[node];
 
-        if (sample <= threshold) {
+        if (sample <= threshold || abs(sample - threshold) < 1e-5) {
             node = this->children_left[node];
         } else {
             node = this->children_right[node];
@@ -21,11 +21,6 @@ tuple<double, double> Tree::predict(const std::vector<double>& features) {
     }
 
     tuple<double, double> value = this->value[node];
-
-    printf("%d: %f, %f\n",
-            node,
-            get<0>(value),
-            get<1>(value));
 
     return value;
 }

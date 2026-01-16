@@ -33,23 +33,17 @@ int main(int argc, char** argv) {
     auto scaler = data.at("scaler").get<Scaler>();
     auto forest = data.at("model").get<Forest>();
 
-    for (auto sample: samples) {
-        cout << sample.to_string() << endl;
-    }
-    return -1;
-
-    // run the forest
     int he = 0;
-    auto sample = samples[0];
+    // run the forest
+    for (auto sample: samples) {
 
-    auto svec = sample.to_vec();
+        auto svec = sample.to_vec();
 
-    // TODO(austin.jones): get this from forest
-    scaler.transform(svec, 13);
+        // TODO(austin.jones): get this from forest
+        scaler.transform(svec, 13);
 
-    auto val = forest.predict(svec);
-
-    he += val;
+        he += forest.predict(svec);
+    }
 
     cout << he << endl;
 
