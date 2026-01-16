@@ -12,7 +12,7 @@ class Tree
     std::vector<std::tuple<double, double>> value;
     std::vector<int> n_node_samples;
 public:
-    std::tuple<double, double> predict(const std::vector<double>& features);
+    std::tuple<double, double> predict(const std::vector<double>& features) const;
 
     friend void to_json(nlohmann::json& j, const Tree& t);
     friend void from_json(const nlohmann::json& j, Tree& t);

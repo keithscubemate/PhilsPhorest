@@ -4,7 +4,7 @@
 
 using namespace std;
 
-tuple<double, double> Tree::predict(const std::vector<double>& features) {
+tuple<double, double> Tree::predict(const std::vector<double>& features) const {
     int node = 0;
 
     while (this->children_left[node] != -1) {

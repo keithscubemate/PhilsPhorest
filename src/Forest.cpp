@@ -14,7 +14,7 @@ int Forest::predict(const std::vector<double>& features) {
         throw;
     }
 
-    for (auto tree: this->trees) {
+    for (auto& tree: this->trees) {
         auto vote = tree.predict(features);
 
         get<0>(class_votes) += get<0>(vote);
