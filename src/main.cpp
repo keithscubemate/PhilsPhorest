@@ -4,12 +4,9 @@
 #include <vector>
 #include <string>
 
-#include "json.hpp"
 #include "Sample.h"
 #include "Predictor.h"
-#include "model_data.h"
 
-using json = nlohmann::json;
 using namespace std;
 
 vector<Sample> csv_to_samples(ifstream& fin);
@@ -25,9 +22,7 @@ int main(int argc, char** argv) {
     ifstream sample_fin(sample_file);
     auto samples = csv_to_samples(sample_fin);
 
-    json data = json::parse(string(MODEL_DATA));
-
-    auto predictor = data.get<Predictor>();
+    auto predictor = Predictor::LoadEmbedded();
 
     int he = 0;
     // run the forest
