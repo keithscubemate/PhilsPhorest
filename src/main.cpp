@@ -2,10 +2,12 @@
 #include <iostream>
 #include <stdio.h>
 #include <vector>
+#include <string>
 
 #include "json.hpp"
 #include "Sample.h"
 #include "Predictor.h"
+#include "model_data.h"
 
 using json = nlohmann::json;
 using namespace std;
@@ -13,21 +15,17 @@ using namespace std;
 vector<Sample> csv_to_samples(ifstream& fin);
 
 int main(int argc, char** argv) {
-
-    if (argc != 3) {
-        printf("usage: %s <model_json> <sample_csv>\n", argv[0]);
+    if (argc != 2) {
+        printf("usage: %s <sample_csv>\n", argv[0]);
         return -1;
     }
 
     // get the samples
-    auto sample_file = argv[2];
+    auto sample_file = argv[1];
     ifstream sample_fin(sample_file);
     auto samples = csv_to_samples(sample_fin);
 
-    // get the model
-    auto model_file = argv[1];
-    ifstream model_fin(model_file);
-    json data = json::parse(model_fin);
+    json data = json::parse(string(MODEL_DATA));
 
     auto predictor = data.get<Predictor>();
 
