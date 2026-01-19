@@ -6,11 +6,11 @@
 using json = nlohmann::json;
 using namespace std;
 
-int Forest::predict(const std::vector<double>& features) const {
+int Forest::predict(const vector<double>& features) const {
     tuple<double, double> class_votes = make_tuple(0.0, 0.0);
 
     if (static_cast<int>(features.size()) != this->n_features) {
-        throw std::invalid_argument(
+        throw invalid_argument(
             "Feature vector size " + to_string(features.size()) +
             " does not match expected size " + to_string(this->n_features)
         );
@@ -31,17 +31,4 @@ int Forest::predict(const std::vector<double>& features) const {
     } else {
         return this->classes[0];
     }
-}
-
-Forest Forest::from_json(const json& d_info) {
-    Forest forest;
-
-    forest.n_classes  = d_info["model"]["n_classes"];
-    forest.n_features = d_info["model"]["n_features"];
-
-    for (const auto& tree_json : d_info["model"]["trees"]) {
-        forest.trees.push_back(tree_json.get<Tree>());
-    }
-
-    return forest;
 }

@@ -3,8 +3,8 @@
 
 #include "json.hpp"
 
-class Scaler
-{
+class Scaler {
+private:
     std::vector<double> scale;
     std::vector<double> mean;
 public:

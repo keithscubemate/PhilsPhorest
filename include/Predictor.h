@@ -6,12 +6,10 @@
 #include "Scaler.h"
 #include "Forest.h"
 
-class Predictor
-{
+class Predictor {
 private:
     Scaler scaler;
     Forest forest;
-
 public:
     Predictor() = default;
 

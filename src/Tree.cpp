@@ -2,9 +2,10 @@
 
 #include "Tree.h"
 
+using json = nlohmann::json;
 using namespace std;
 
-tuple<double, double> Tree::predict(const std::vector<double>& features) const {
+tuple<double, double> Tree::predict(const vector<double>& features) const {
     auto node = 0;
 
     while (this->children_left[node] != -1) {
@@ -25,7 +26,7 @@ tuple<double, double> Tree::predict(const std::vector<double>& features) const {
     return value;
 }
 
-void to_json(nlohmann::json& j, const Tree& t) {
+void to_json(json& j, const Tree& t) {
     vector<vector<vector<double>>> value;
 
     for (auto tup: t.value) {
@@ -34,7 +35,7 @@ void to_json(nlohmann::json& j, const Tree& t) {
     }
 
 
-    j = nlohmann::json{
+    j = json{
         {"feature", t.feature},
         {"threshold", t.threshold},
         {"children_left", t.children_left},
@@ -44,7 +45,7 @@ void to_json(nlohmann::json& j, const Tree& t) {
     };
 }
 
-void from_json(const nlohmann::json& j, Tree& t) {
+void from_json(const json& j, Tree& t) {
     j.at("feature").get_to(t.feature);
     j.at("threshold").get_to(t.threshold);
     j.at("children_left").get_to(t.children_left);

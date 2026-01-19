@@ -31,7 +31,7 @@ Sample Sample::from_line(const string& line) {
     return sample;
 }
 
-std::string Sample::to_string() const {
+string Sample::to_string() const {
     stringstream oss;
 
     oss << defaultfloat << setprecision(numeric_limits<double>::max_digits10);

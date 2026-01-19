@@ -1,13 +1,13 @@
 ﻿#include "Scaler.h"
 #include <stdexcept>
 
-using json = nlohmann::json;
+using namespace std;
 
-void Scaler::transform(std::vector<double>& data, int num_features) const {
+void Scaler::transform(vector<double>& data, int num_features) const {
     if (data.size() != static_cast<size_t>(num_features)) {
-        throw std::invalid_argument(
-            "Data vector size " + std::to_string(data.size()) +
-            " does not match expected size " + std::to_string(num_features)
+        throw invalid_argument(
+            "Data vector size " + to_string(data.size()) +
+            " does not match expected size " + to_string(num_features)
         );
     }
 

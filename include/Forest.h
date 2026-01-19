@@ -5,8 +5,8 @@
 #include "Tree.h"
 #include "json.hpp"
 
-class Forest
-{
+class Forest {
+private:
     int n_estimators;
     int n_classes;
     int n_features;

@@ -11,7 +11,7 @@ int Predictor::predict(vector<double>& features) const {
     return forest.predict(features);
 }
 
-void from_json(const nlohmann::json& data, Predictor& p) {
+void from_json(const json& data, Predictor& p) {
     p.scaler = data.at("scaler").get<Scaler>();
     p.forest = data.at("model").get<Forest>();
 }
