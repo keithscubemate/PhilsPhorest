@@ -17,7 +17,9 @@ void from_json(const json& data, Predictor& p) {
 }
 
 Predictor Predictor::LoadEmbedded() {
-    json data = json::parse(string(MODEL_DATA));
+    std::string s(reinterpret_cast< char const* >(data_model_json));
+
+    json data = json::parse(s);
 
     return data.get<Predictor>();
 }
