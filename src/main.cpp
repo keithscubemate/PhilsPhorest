@@ -4,9 +4,8 @@
 #include <vector>
 
 #include "json.hpp"
-#include "Scaler.h"
 #include "Sample.h"
-#include "Forest.h"
+#include "Predictor.h"
 
 using json = nlohmann::json;
 using namespace std;
@@ -30,17 +29,14 @@ int main(int argc, char** argv) {
     ifstream model_fin(model_file);
     json data = json::parse(model_fin);
 
-    auto scaler = data.at("scaler").get<Scaler>();
-    auto forest = data.at("model").get<Forest>();
+    auto predictor = data.get<Predictor>();
 
     int he = 0;
     // run the forest
     for (const auto& sample : samples) {
         auto svec = sample.to_vec();
 
-        scaler.transform(svec, forest.get_n_features());
-
-        he += forest.predict(svec);
+        he += predictor.predict(svec);
     }
 
     cout << he << endl;

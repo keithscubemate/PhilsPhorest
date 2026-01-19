@@ -13,7 +13,7 @@ class Forest
     std::vector<int> classes;
     std::vector<Tree> trees;
 public:
-    int predict(const std::vector<double>& features);
+    int predict(const std::vector<double>& features) const;
     static Forest from_json(const nlohmann::json& d_info);
 
     int get_n_features() const { return this->n_features; }

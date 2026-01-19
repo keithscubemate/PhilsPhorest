@@ -6,7 +6,7 @@
 using json = nlohmann::json;
 using namespace std;
 
-int Forest::predict(const std::vector<double>& features) {
+int Forest::predict(const std::vector<double>& features) const {
     tuple<double, double> class_votes = make_tuple(0.0, 0.0);
 
     if (static_cast<int>(features.size()) != this->n_features) {

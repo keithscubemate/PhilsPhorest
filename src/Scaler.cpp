@@ -3,7 +3,7 @@
 
 using json = nlohmann::json;
 
-void Scaler::transform(std::vector<double>& data, int num_features) {
+void Scaler::transform(std::vector<double>& data, int num_features) const {
     if (data.size() != static_cast<size_t>(num_features)) {
         throw std::invalid_argument(
             "Data vector size " + std::to_string(data.size()) +
