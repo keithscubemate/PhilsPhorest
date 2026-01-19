@@ -57,9 +57,23 @@ TEST_CASE("Scaler works with zero mean", "[scaler][transform]") {
     }
 }
 
-// NOTE: Dimension mismatch validation tests are disabled due to Scaler implementation
-// calling throw; without an active exception, which causes program abort.
-// This should be fixed in Scaler::transform() to throw proper exceptions.
+TEST_CASE("Scaler detects dimension mismatch - too few features", "[scaler][validation]") {
+    std::vector<double> mean(13, 1.0);
+    std::vector<double> scale(13, 1.0);
+    Scaler scaler = create_scaler_with_values(mean, scale);
+
+    std::vector<double> data = {10.0, 20.0};  // Only 2 elements
+    REQUIRE_THROWS_AS(scaler.transform(data, 13), std::invalid_argument);
+}
+
+TEST_CASE("Scaler detects dimension mismatch - too many features", "[scaler][validation]") {
+    std::vector<double> mean(13, 1.0);
+    std::vector<double> scale(13, 1.0);
+    Scaler scaler = create_scaler_with_values(mean, scale);
+
+    std::vector<double> data = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0};
+    REQUIRE_THROWS_AS(scaler.transform(data, 13), std::invalid_argument);
+}
 
 TEST_CASE("Scaler modifies vector in place", "[scaler][behavior]") {
     std::vector<double> mean = {10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0, 110.0, 120.0, 130.0};

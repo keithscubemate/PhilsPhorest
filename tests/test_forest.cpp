@@ -31,9 +31,30 @@ TEST_CASE("Forest breaks ties in favor of class 1", "[forest][tiebreak]") {
     REQUIRE(prediction == 1);
 }
 
-// NOTE: Feature count validation tests are disabled due to Forest implementation
-// calling throw; without an active exception, which causes program abort.
-// This should be fixed in Forest::predict() to throw proper exceptions.
+TEST_CASE("Forest throws on incorrect feature count - too few", "[forest][validation]") {
+    Forest forest = create_single_tree_forest();
+
+    std::vector<double> features(10, 0.0);  // Only 10 features, needs 13
+
+    REQUIRE_THROWS_AS(forest.predict(features), std::invalid_argument);
+}
+
+TEST_CASE("Forest throws on incorrect feature count - too many", "[forest][validation]") {
+    Forest forest = create_single_tree_forest();
+
+    std::vector<double> features(15, 0.0);  // 15 features, needs 13
+
+    REQUIRE_THROWS_AS(forest.predict(features), std::invalid_argument);
+}
+
+TEST_CASE("Forest accepts correct feature count", "[forest][validation]") {
+    Forest forest = create_single_tree_forest();
+
+    std::vector<double> features(13, 0.0);  // Exactly 13 features
+
+    int prediction = forest.predict(features);
+    REQUIRE((prediction == 0 || prediction == 1));
+}
 
 TEST_CASE("Forest deterministic predictions", "[forest][behavior]") {
     Forest forest = create_single_tree_forest();

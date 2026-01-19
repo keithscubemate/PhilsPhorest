@@ -21,7 +21,7 @@ struct Sample {
     double YE_Tc;
     double AF;
 
-    static Sample from_line(const std::string line);
-    std::string to_string();
-    std::vector<double> to_vec();
+    static Sample from_line(const std::string& line);
+    std::string to_string() const;
+    std::vector<double> to_vec() const;
 };

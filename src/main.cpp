@@ -35,12 +35,10 @@ int main(int argc, char** argv) {
 
     int he = 0;
     // run the forest
-    for (auto sample: samples) {
-
+    for (const auto& sample : samples) {
         auto svec = sample.to_vec();
 
-        // TODO(austin.jones): get this from forest
-        scaler.transform(svec, 13);
+        scaler.transform(svec, forest.get_n_features());
 
         he += forest.predict(svec);
     }

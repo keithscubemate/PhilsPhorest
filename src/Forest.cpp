@@ -1,6 +1,7 @@
 ﻿#include "Forest.h"
 #include "Scaler.h"
 #include "Tree.h"
+#include <stdexcept>
 
 using json = nlohmann::json;
 using namespace std;
@@ -8,10 +9,11 @@ using namespace std;
 int Forest::predict(const std::vector<double>& features) {
     tuple<double, double> class_votes = make_tuple(0.0, 0.0);
 
-    // TODO(austin.jones): mayber convert this to a result throw?
     if (static_cast<int>(features.size()) != this->n_features) {
-        printf("features vec wrong size\n");
-        throw;
+        throw std::invalid_argument(
+            "Feature vector size " + to_string(features.size()) +
+            " does not match expected size " + to_string(this->n_features)
+        );
     }
 
     for (auto& tree: this->trees) {
@@ -37,11 +39,8 @@ Forest Forest::from_json(const json& d_info) {
     forest.n_classes  = d_info["model"]["n_classes"];
     forest.n_features = d_info["model"]["n_features"];
 
-    auto forest_size = d_info["model"]["trees"].size();
-
-    for (size_t i = 0; i < forest_size; i++) {
-        auto tree = d_info.at("model").at("trees").at(i).get<Tree>();
-        forest.trees.push_back(tree);
+    for (const auto& tree_json : d_info["model"]["trees"]) {
+        forest.trees.push_back(tree_json.get<Tree>());
     }
 
     return forest;

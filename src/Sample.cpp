@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Sample Sample::from_line(string line) {
+Sample Sample::from_line(const string& line) {
     Sample sample;
 
     sscanf(
@@ -31,7 +31,7 @@ Sample Sample::from_line(string line) {
     return sample;
 }
 
-std::string Sample::to_string() {
+std::string Sample::to_string() const {
     stringstream oss;
 
     oss << defaultfloat << setprecision(numeric_limits<double>::max_digits10);
@@ -56,7 +56,7 @@ std::string Sample::to_string() {
     return oss.str();
 }
 
-vector<double> Sample::to_vec() {
+vector<double> Sample::to_vec() const {
     return {
         this->Nep_Tb,
         this->Nep_TOF,

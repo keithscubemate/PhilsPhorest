@@ -1,12 +1,14 @@
 ﻿#include "Scaler.h"
+#include <stdexcept>
 
 using json = nlohmann::json;
 
 void Scaler::transform(std::vector<double>& data, int num_features) {
-    // TODO(austin.jones): mayber convert this to a result throw?
     if (data.size() != static_cast<size_t>(num_features)) {
-        printf("data didn't match scaler\n");
-        throw;
+        throw std::invalid_argument(
+            "Data vector size " + std::to_string(data.size()) +
+            " does not match expected size " + std::to_string(num_features)
+        );
     }
 
     for (auto i = 0; i < num_features; i++) {

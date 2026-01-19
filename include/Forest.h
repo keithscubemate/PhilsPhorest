@@ -16,5 +16,9 @@ public:
     int predict(const std::vector<double>& features);
     static Forest from_json(const nlohmann::json& d_info);
 
+    int get_n_features() const { return this->n_features; }
+    int get_n_classes() const { return this->n_classes; }
+    int get_n_estimators() const { return this->n_estimators; }
+
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(Forest, n_estimators, n_features, n_classes, classes, trees)
 };
