@@ -5,13 +5,13 @@
 using namespace std;
 
 tuple<double, double> Tree::predict(const std::vector<double>& features) const {
-    int node = 0;
+    auto node = 0;
 
     while (this->children_left[node] != -1) {
-        int feature = this->feature[node];
-        double sample = features[feature];
+        const auto feature = this->feature[node];
+        const auto sample = features[feature];
 
-        double threshold = this->threshold[node];
+        const auto threshold = this->threshold[node];
 
         if (sample <= threshold || abs(sample - threshold) < 1e-5) {
             node = this->children_left[node];

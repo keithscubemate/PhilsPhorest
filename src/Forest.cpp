@@ -25,9 +25,9 @@ int Forest::predict(const std::vector<double>& features) {
     auto yes_votes = get<1>(class_votes);
 
     if (yes_votes >= no_votes) {
-        return 1;
+        return this->classes[1];
     } else {
-        return 0;
+        return this->classes[0];
     }
 }
 
