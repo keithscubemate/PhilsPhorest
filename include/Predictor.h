@@ -5,6 +5,7 @@
 #include "json.hpp"
 #include "Scaler.h"
 #include "Forest.h"
+#include "FeatureArray.h"
 
 class Predictor {
 private:
@@ -13,7 +14,7 @@ private:
 public:
     Predictor() = default;
 
-    int predict(std::vector<double>& features) const;
+    int predict(FeatureArray& features) const;
     static Predictor LoadEmbedded();
     friend void to_json(nlohmann::json& j, const Predictor& p);
     friend void from_json(const nlohmann::json& j, Predictor& p);

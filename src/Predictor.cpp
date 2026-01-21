@@ -5,8 +5,8 @@
 using json = nlohmann::json;
 using namespace std;
 
-int Predictor::predict(vector<double>& features) const {
-    this->scaler.transform(features, this->forest.get_n_features());
+int Predictor::predict(FeatureArray& features) const {
+    this->scaler.transform(features);
 
     return forest.predict(features);
 }

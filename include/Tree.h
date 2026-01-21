@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "json.hpp"
+#include "FeatureArray.h"
 
 class Tree {
 private:
@@ -14,5 +15,5 @@ private:
 public:
     friend void to_json(nlohmann::json& j, const Tree& t);
     friend void from_json(const nlohmann::json& j, Tree& t);
-    std::tuple<double, double> predict(const std::vector<double>& features) const;
+    std::tuple<double, double> predict(const FeatureArray& features) const;
 };

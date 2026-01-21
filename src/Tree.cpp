@@ -5,7 +5,7 @@
 using json = nlohmann::json;
 using namespace std;
 
-tuple<double, double> Tree::predict(const vector<double>& features) const {
+tuple<double, double> Tree::predict(const FeatureArray& features) const {
     auto node = 0;
 
     while (this->children_left[node] != -1) {

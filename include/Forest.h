@@ -3,6 +3,7 @@
 
 #include "Scaler.h"
 #include "Tree.h"
+#include "FeatureArray.h"
 #include "json.hpp"
 
 class Forest {
@@ -13,7 +14,7 @@ private:
     std::vector<int> classes;
     std::vector<Tree> trees;
 public:
-    int predict(const std::vector<double>& features) const;
+    int predict(const FeatureArray& features) const;
     static Forest from_json(const nlohmann::json& d_info);
 
     int get_n_features() const { return this->n_features; }

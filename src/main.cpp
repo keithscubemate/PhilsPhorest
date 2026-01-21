@@ -27,9 +27,9 @@ int main(int argc, char** argv) {
     int he = 0;
     // run the forest
     for (const auto& sample : samples) {
-        auto svec = sample.to_vec();
+        auto sarr = sample.to_array();
 
-        he += predictor.predict(svec);
+        he += predictor.predict(sarr);
     }
 
     cout << he << endl;

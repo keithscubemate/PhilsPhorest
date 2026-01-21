@@ -6,6 +6,7 @@
 #include "../include/Scaler.h"
 #include "../include/Forest.h"
 #include "../include/Predictor.h"
+#include "../include/FeatureArray.h"
 
 using json = nlohmann::json;
 namespace fs = std::filesystem;
@@ -70,8 +71,8 @@ TEST_CASE("Complete prediction pipeline", "[integration][pipeline]") {
     sample.AF = 0.0;
 
     // Transform features
-    std::vector<double> features = sample.to_vec();
-    scaler.transform(features, 13);
+    FeatureArray features = sample.to_array();
+    scaler.transform(features);
 
     // Predict
     int prediction = forest.predict(features);
@@ -152,7 +153,8 @@ TEST_CASE("Forest with multiple trees aggregation", "[integration][voting]") {
 
     Forest forest = forest_json.get<Forest>();
 
-    std::vector<double> features(13, 3.0);  // All features = 3.0, so 3.0 < 5.0 -> goes left
+    FeatureArray features = {};
+    features.fill(3.0);  // All features = 3.0, so 3.0 < 5.0 -> goes left
     int prediction = forest.predict(features);
 
     // All trees vote for class 0, so result should be 0
@@ -204,7 +206,7 @@ TEST_CASE("Make predictions on TrainDataTest10s.csv", "[integration][data_folder
     int class_1_count = 0;
 
     for (size_t i = 0; i < std::min((size_t)100, samples.size()); ++i) {
-        auto features = samples[i].to_vec();
+        auto features = samples[i].to_array();
         int prediction = predictor.predict(features);
 
         REQUIRE((prediction == 0 || prediction == 1));
@@ -230,7 +232,7 @@ TEST_CASE("Predictions on Test_full_12_5_Alpha1_T3_sorted.csv", "[integration][d
     Predictor predictor = Predictor::LoadEmbedded();
     int class_0 = 0, class_1 = 0;
     for (const auto& sample : samples) {
-        auto features = sample.to_vec();
+        auto features = sample.to_array();
         int pred = predictor.predict(features);
         if (pred == 0) class_0++;
         else class_1++;
@@ -248,7 +250,7 @@ TEST_CASE("Predictions on Test_full_12_2_Alpha5_T3_rep2_sorted.csv", "[integrati
     Predictor predictor = Predictor::LoadEmbedded();
     int class_0 = 0, class_1 = 0;
     for (const auto& sample : samples) {
-        auto features = sample.to_vec();
+        auto features = sample.to_array();
         int pred = predictor.predict(features);
         if (pred == 0) class_0++;
         else class_1++;
@@ -266,7 +268,7 @@ TEST_CASE("Predictions on Test_full_12_5_Alpha1_T1_sorted.csv", "[integration][d
     Predictor predictor = Predictor::LoadEmbedded();
     int class_0 = 0, class_1 = 0;
     for (const auto& sample : samples) {
-        auto features = sample.to_vec();
+        auto features = sample.to_array();
         int pred = predictor.predict(features);
         if (pred == 0) class_0++;
         else class_1++;
@@ -284,7 +286,7 @@ TEST_CASE("Predictions on Test_full_12_5_Alpha1_lowYE_sorted.csv", "[integration
     Predictor predictor = Predictor::LoadEmbedded();
     int class_0 = 0, class_1 = 0;
     for (const auto& sample : samples) {
-        auto features = sample.to_vec();
+        auto features = sample.to_array();
         int pred = predictor.predict(features);
         if (pred == 0) class_0++;
         else class_1++;
@@ -302,7 +304,7 @@ TEST_CASE("Predictions on Test_full_12_5_Alpha1_mediumYE_sorted.csv", "[integrat
     Predictor predictor = Predictor::LoadEmbedded();
     int class_0 = 0, class_1 = 0;
     for (const auto& sample : samples) {
-        auto features = sample.to_vec();
+        auto features = sample.to_array();
         int pred = predictor.predict(features);
         if (pred == 0) class_0++;
         else class_1++;
@@ -320,7 +322,7 @@ TEST_CASE("Predictions on Test_full_12_2_Alpha5_T2_rep2_sorted.csv", "[integrati
     Predictor predictor = Predictor::LoadEmbedded();
     int class_0 = 0, class_1 = 0;
     for (const auto& sample : samples) {
-        auto features = sample.to_vec();
+        auto features = sample.to_array();
         int pred = predictor.predict(features);
         if (pred == 0) class_0++;
         else class_1++;
@@ -338,7 +340,7 @@ TEST_CASE("Predictions on Test_full_12_2_Alpha5_mediumYE_sorted.csv", "[integrat
     Predictor predictor = Predictor::LoadEmbedded();
     int class_0 = 0, class_1 = 0;
     for (const auto& sample : samples) {
-        auto features = sample.to_vec();
+        auto features = sample.to_array();
         int pred = predictor.predict(features);
         if (pred == 0) class_0++;
         else class_1++;
@@ -356,7 +358,7 @@ TEST_CASE("Predictions on Test_full_12_2_Alpha5_T1_rep1_sorted.csv", "[integrati
     Predictor predictor = Predictor::LoadEmbedded();
     int class_0 = 0, class_1 = 0;
     for (const auto& sample : samples) {
-        auto features = sample.to_vec();
+        auto features = sample.to_array();
         int pred = predictor.predict(features);
         if (pred == 0) class_0++;
         else class_1++;
@@ -374,7 +376,7 @@ TEST_CASE("Predictions on Test_full_12_5_Alpha1_highYE_sorted.csv", "[integratio
     Predictor predictor = Predictor::LoadEmbedded();
     int class_0 = 0, class_1 = 0;
     for (const auto& sample : samples) {
-        auto features = sample.to_vec();
+        auto features = sample.to_array();
         int pred = predictor.predict(features);
         if (pred == 0) class_0++;
         else class_1++;
@@ -392,7 +394,7 @@ TEST_CASE("Predictions on Test_full_12_2_Alpha5_lowYE_sorted.csv", "[integration
     Predictor predictor = Predictor::LoadEmbedded();
     int class_0 = 0, class_1 = 0;
     for (const auto& sample : samples) {
-        auto features = sample.to_vec();
+        auto features = sample.to_array();
         int pred = predictor.predict(features);
         if (pred == 0) class_0++;
         else class_1++;
@@ -410,7 +412,7 @@ TEST_CASE("Predictions on Test_full_12_2_Alpha5_highYE_sorted.csv", "[integratio
     Predictor predictor = Predictor::LoadEmbedded();
     int class_0 = 0, class_1 = 0;
     for (const auto& sample : samples) {
-        auto features = sample.to_vec();
+        auto features = sample.to_array();
         int pred = predictor.predict(features);
         if (pred == 0) class_0++;
         else class_1++;
@@ -435,7 +437,7 @@ TEST_CASE("End-to-end batch prediction pipeline with real data", "[integration][
     // Process all samples and aggregate predictions
     int he = 0;  // Count of class 1 predictions (same as main.cpp)
     for (const auto& sample : samples) {
-        auto svec = sample.to_vec();
+        auto svec = sample.to_array();
         he += predictor.predict(svec);
     }
 

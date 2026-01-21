@@ -6,3 +6,7 @@ a.out
 pp
 phils_phorest
 test_runner
+benchmark_runner
+*.benchmark.txt
+baseline_results.txt
+optimized_results.txt

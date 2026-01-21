@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <vector>
 #include <string>
+#include "FeatureArray.h"
 
 struct Sample {
     double Nep_index;
@@ -24,4 +25,5 @@ struct Sample {
     static Sample from_line(const std::string& line);
     std::string to_string() const;
     std::vector<double> to_vec() const;
+    FeatureArray to_array() const;
 };

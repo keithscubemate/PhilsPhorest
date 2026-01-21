@@ -1,20 +1,12 @@
 ﻿#include "Forest.h"
 #include "Scaler.h"
 #include "Tree.h"
-#include <stdexcept>
 
 using json = nlohmann::json;
 using namespace std;
 
-int Forest::predict(const vector<double>& features) const {
+int Forest::predict(const FeatureArray& features) const {
     tuple<double, double> class_votes = make_tuple(0.0, 0.0);
-
-    if (static_cast<int>(features.size()) != this->n_features) {
-        throw invalid_argument(
-            "Feature vector size " + to_string(features.size()) +
-            " does not match expected size " + to_string(this->n_features)
-        );
-    }
 
     for (auto& tree: this->trees) {
         auto vote = tree.predict(features);

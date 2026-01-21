@@ -73,3 +73,21 @@ vector<double> Sample::to_vec() const {
         this->AF,
     };
 }
+
+FeatureArray Sample::to_array() const {
+    return FeatureArray{{
+        this->Nep_Tb,
+        this->Nep_TOF,
+        this->NepSumArray,
+        this->NepPeakArray,
+        this->NepDArray,
+        this->YE_TOF,
+        this->YE_Size,
+        this->YE_Mean,
+        this->YE_Median,
+        this->YE_V,
+        this->YE_Te,
+        this->YE_Tc,
+        this->AF,
+    }};
+}
