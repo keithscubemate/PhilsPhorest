@@ -3,7 +3,7 @@
 #include <array>
 
 #include "json.hpp"
-#include "FeatureArray.h"
+#include "Sample.h"
 
 class Scaler {
 private:

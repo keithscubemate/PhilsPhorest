@@ -4,8 +4,8 @@
 #include <string>
 #include "json.hpp"
 #include "Scaler.h"
+#include "Sample.h"
 #include "Forest.h"
-#include "FeatureArray.h"
 
 class Predictor {
 private:

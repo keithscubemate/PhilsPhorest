@@ -6,7 +6,6 @@
 #include "Tree.h"
 #include "Forest.h"
 #include "Predictor.h"
-#include "FeatureArray.h"
 
 // Load real test data
 static std::vector<Sample> load_test_samples() {

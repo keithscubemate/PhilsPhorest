@@ -29,7 +29,8 @@ int main(int argc, char** argv) {
     for (const auto& sample : samples) {
         auto sarr = sample.to_array();
 
-        he += predictor.predict(sarr);
+        auto p = predictor.predict(sarr);
+        he += p;
     }
 
     cout << he << endl;

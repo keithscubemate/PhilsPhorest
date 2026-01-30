@@ -7,7 +7,6 @@ Convert `std::vector<double>` to `std::array<double, 13>` in performance-critica
 
 ### 1. Infrastructure
 - **Makefile**: Added benchmarking support with Catch2 built-in benchmarking
-- **FeatureArray.h**: Created type definition for `std::array<double, 13>`
 - **Benchmarks**: Added comprehensive baseline and optimization benchmarks
 
 ### 2. Core Conversions
@@ -68,7 +67,6 @@ Convert `std::vector<double>` to `std::array<double, 13>` in performance-critica
 ## Files Modified
 
 ### New Files
-- `include/FeatureArray.h`
 - `tests/bench_main.cpp`
 - `tests/bench_baseline.cpp`
 

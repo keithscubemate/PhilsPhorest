@@ -2,7 +2,7 @@
 #include <vector>
 
 #include "json.hpp"
-#include "FeatureArray.h"
+#include "Sample.h"
 
 class Tree {
 private:

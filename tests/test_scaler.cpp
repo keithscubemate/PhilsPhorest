@@ -1,7 +1,6 @@
 #include <catch.hpp>
 #include <json.hpp>
 #include "../include/Scaler.h"
-#include "../include/FeatureArray.h"
 
 using json = nlohmann::json;
 // Helper to create scaler with specific means and scales

@@ -1,6 +1,5 @@
 #include "test_helpers.hpp"
 #include <json.hpp>
-#include "../include/FeatureArray.h"
 
 using json = nlohmann::json;
 using namespace std;

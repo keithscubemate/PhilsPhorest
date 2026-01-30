@@ -1,9 +1,11 @@
 #pragma once
 
 #include <stdio.h>
-#include <vector>
 #include <string>
-#include "FeatureArray.h"
+#include <array>
+
+constexpr size_t N_FEATURES = 13;
+using FeatureArray = std::array<double, N_FEATURES>;
 
 struct Sample {
     double Nep_index;
@@ -24,6 +26,5 @@ struct Sample {
 
     static Sample from_line(const std::string& line);
     std::string to_string() const;
-    std::vector<double> to_vec() const;
     FeatureArray to_array() const;
 };

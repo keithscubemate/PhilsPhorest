@@ -1,7 +1,6 @@
 #include <catch.hpp>
 #include <cmath>
 #include "../include/Tree.h"
-#include "../include/FeatureArray.h"
 #include "test_helpers.hpp"
 
 TEST_CASE("Tree selects left branch when feature <= threshold", "[tree][traversal]") {

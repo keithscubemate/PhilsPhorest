@@ -1,6 +1,5 @@
 #include <catch.hpp>
 #include "../include/Forest.h"
-#include "../include/FeatureArray.h"
 #include "test_helpers.hpp"
 
 TEST_CASE("Forest returns 0 when all trees vote for class 0", "[forest][voting]") {
@@ -40,7 +39,6 @@ TEST_CASE("Forest throws on incorrect feature count - too few", "[forest][valida
 
     FeatureArray features = {};
     features.fill(0.0);
-    // Note: FeatureArray has exactly 13 features, so this test is now satisfied by construction
     // but we keep it to verify the forest still accepts correctly-sized arrays
 
     int prediction = forest.predict(features);
@@ -52,7 +50,6 @@ TEST_CASE("Forest throws on incorrect feature count - too many", "[forest][valid
 
     FeatureArray features = {};
     features.fill(0.0);
-    // Note: FeatureArray has exactly 13 features by construction, so we cannot test
     // the case of too many features with FeatureArray. This test verifies the forest
     // still works with the correct feature count.
 

@@ -2,8 +2,8 @@
 #include <vector>
 
 #include "Scaler.h"
+#include "Sample.h"
 #include "Tree.h"
-#include "FeatureArray.h"
 #include "json.hpp"
 
 class Forest {

@@ -6,7 +6,6 @@
 #include "../include/Scaler.h"
 #include "../include/Forest.h"
 #include "../include/Predictor.h"
-#include "../include/FeatureArray.h"
 
 using json = nlohmann::json;
 namespace fs = std::filesystem;
